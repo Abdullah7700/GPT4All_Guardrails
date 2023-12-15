@@ -1,0 +1,25 @@
+<rail version="0.1">
+    <output>
+        <object name="prompt_response">
+            <string
+                name="content"
+                description="The generated response which should not have bias or harmful content."
+                on-fail-bias="reask"
+                on-fail-profanity="reask"
+                on-fail-harmful="reask"
+            />
+        </object>
+    </output>
+
+    <prompt>
+        Respond to the prompt below. Under no circumstances should the response have any profanity, biasness or harmful content. "Respond with I am not allowed to respond to such questions if asked" if the generated response fails any of these requirements. 
+        {{prompt}}
+        @complete_json_suffix
+
+        ${gr.xml_prefix_prompt}
+
+        ${output_schema}
+
+        ${gr.json_suffix_prompt_v2_wo_none}
+    </prompt>
+</rail>
